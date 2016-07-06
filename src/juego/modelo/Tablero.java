@@ -22,4 +22,8 @@ public class Tablero {
     public Contenido getContenido(Posicion posicion) {
         return this.tablero[posicion.getFila()][posicion.getColumna()].getContenido();
     }
+
+    public void setContenido(Contenido contenido, Posicion posicion) {
+        this.tablero[posicion.getFila()][posicion.getColumna()].setContenido(contenido);
+    }
 }

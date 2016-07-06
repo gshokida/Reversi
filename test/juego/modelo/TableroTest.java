@@ -1,5 +1,7 @@
 package juego.modelo;
 
+import juego.modelo.contenido.ColorNegro;
+import juego.modelo.contenido.Ficha;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -19,5 +21,16 @@ public class TableroTest {
                 assertEquals(false, tablero.getContenido(posicion).ocupado());
             }
         }
+    }
+
+    @Test
+    public void tableroAgregarContenido() {
+        Posicion posicion = new Posicion(4, 4);
+        Tablero tablero = new Tablero();
+        Ficha ficha = new Ficha(ColorNegro.getInstance());
+
+        tablero.setContenido(ficha, posicion);
+
+        assertEquals(ficha, tablero.getContenido(posicion));
     }
 }
