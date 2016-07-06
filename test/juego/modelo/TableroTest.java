@@ -3,9 +3,11 @@ package juego.modelo;
 import juego.modelo.contenido.ColorBlanco;
 import juego.modelo.contenido.ColorNegro;
 import juego.modelo.contenido.Ficha;
+import juego.modelo.exceptions.PosicionNoValidaNoSePuedeAgregarFichaException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 
 /**
@@ -30,7 +32,11 @@ public class TableroTest {
         Tablero tablero = new Tablero(8);
         Ficha ficha = new Ficha(ColorNegro.getInstance());
 
-        tablero.setContenido(ficha, posicion);
+        try {
+            tablero.setContenido(ficha, posicion);
+        } catch (PosicionNoValidaNoSePuedeAgregarFichaException e) {
+            fail();
+        }
 
         assertEquals(ficha, tablero.getContenido(posicion));
     }
@@ -41,7 +47,11 @@ public class TableroTest {
         Tablero tablero = new Tablero(8);
         Ficha ficha = new Ficha(ColorBlanco.getInstance());
 
-        tablero.setContenido(ficha, posicion);
+        try {
+            tablero.setContenido(ficha, posicion);
+        } catch (PosicionNoValidaNoSePuedeAgregarFichaException e) {
+            fail();
+        }
 
         assertEquals(ficha, tablero.getContenido(posicion));
     }
@@ -59,8 +69,21 @@ public class TableroTest {
         Tablero tablero = new Tablero(8);
         Ficha ficha = new Ficha(ColorBlanco.getInstance());
 
-        tablero.setContenido(ficha, posicion);
+        try {
+            tablero.setContenido(ficha, posicion);
+        } catch (PosicionNoValidaNoSePuedeAgregarFichaException e) {
+            fail();
+        }
 
         assertEquals(false, tablero.estaVacio());
+    }
+
+    @Test(expected=PosicionNoValidaNoSePuedeAgregarFichaException.class)
+    public void tableroAgregarContenidoEnColumnaMayorAlLimite() throws PosicionNoValidaNoSePuedeAgregarFichaException {
+        Posicion posicion = new Posicion(4, 8);
+        Tablero tablero = new Tablero(8);
+        Ficha ficha = new Ficha(ColorBlanco.getInstance());
+
+        tablero.setContenido(ficha, posicion);
     }
 }

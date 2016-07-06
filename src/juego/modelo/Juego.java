@@ -33,9 +33,6 @@ public class Juego {
     }
 
     public void setFicha(Posicion posicion) throws CasilleroOcupadoNoSePuedeAgregarFichaException, PosicionNoValidaNoSePuedeAgregarFichaException {
-        if (posicion.getFila() > this.tamanioTablero || posicion.getColumna() > this.tamanioTablero)
-            throw new PosicionNoValidaNoSePuedeAgregarFichaException();
-
         if (this.tableroReversi.getContenido(posicion).ocupado()) {
             throw new CasilleroOcupadoNoSePuedeAgregarFichaException();
         } else {

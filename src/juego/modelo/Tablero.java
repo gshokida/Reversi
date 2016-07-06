@@ -2,6 +2,7 @@ package juego.modelo;
 
 import juego.modelo.contenido.Contenido;
 import juego.modelo.contenido.ContenidoVacio;
+import juego.modelo.exceptions.PosicionNoValidaNoSePuedeAgregarFichaException;
 
 /**
  * Created by German on 05/07/2016.
@@ -23,7 +24,10 @@ public class Tablero {
         return this.tablero[posicion.getFila()][posicion.getColumna()].getContenido();
     }
 
-    public void setContenido(Contenido contenido, Posicion posicion) {
+    public void setContenido(Contenido contenido, Posicion posicion) throws PosicionNoValidaNoSePuedeAgregarFichaException {
+        if (posicion.getFila() > this.tamanioTablero - 1 || posicion.getColumna() > this.tamanioTablero - 1)
+            throw new PosicionNoValidaNoSePuedeAgregarFichaException();
+
         this.tablero[posicion.getFila()][posicion.getColumna()].setContenido(contenido);
     }
 
