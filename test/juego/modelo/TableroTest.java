@@ -1,5 +1,6 @@
 package juego.modelo;
 
+import juego.modelo.contenido.ColorBlanco;
 import juego.modelo.contenido.ColorNegro;
 import juego.modelo.contenido.Ficha;
 import org.junit.Test;
@@ -28,6 +29,17 @@ public class TableroTest {
         Posicion posicion = new Posicion(4, 4);
         Tablero tablero = new Tablero();
         Ficha ficha = new Ficha(ColorNegro.getInstance());
+
+        tablero.setContenido(ficha, posicion);
+
+        assertEquals(ficha, tablero.getContenido(posicion));
+    }
+
+    @Test
+    public void tableroAgregarContenidoFichaBlanca() {
+        Posicion posicion = new Posicion(4, 4);
+        Tablero tablero = new Tablero();
+        Ficha ficha = new Ficha(ColorBlanco.getInstance());
 
         tablero.setContenido(ficha, posicion);
 

@@ -36,6 +36,7 @@ public class Juego {
         } else {
             Ficha ficha = obtenerFicha(this.getJugadorActual());
             this.tableroReversi.setContenido(ficha, posicion);
+            this.controlDeTurnos.pasarTurno();
         }
     }
 

@@ -47,6 +47,22 @@ public class JuegoTest {
             fail();
         }
 
-        assertEquals(jugadorUno, juego.getJugadorActual());
+        assertEquals(jugadorDos, juego.getJugadorActual());
+    }
+
+    @Test
+    public void nuevoJuego_pasoTurno_VerificoPosicionDeLaFicha() {
+        Jugador jugadorUno = new Jugador("NombreUno");
+        Jugador jugadorDos = new Jugador("NombreDos");
+        Juego juego = new Juego(jugadorUno, jugadorDos);
+        Posicion posicion = new Posicion(4, 4);
+
+        try {
+            juego.setFicha(posicion);
+        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException e) {
+            fail();
+        }
+
+        assertEquals(true, juego.getContenido(posicion).ocupado());
     }
 }
