@@ -7,15 +7,15 @@ import juego.modelo.contenido.ContenidoVacio;
  * Created by German on 05/07/2016.
  */
 public class Tablero {
-    private int columnas = 8;
-    private int filas = 8;
+    private int tamanioTablero;
     private Casillero tablero[][];
 
-    public Tablero() {
-        this.tablero = new Casillero[this.filas][this.columnas];
+    public Tablero(int tamanioTablero) {
+        this.tamanioTablero = tamanioTablero;
+        this.tablero = new Casillero[this.tamanioTablero][this.tamanioTablero];
 
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
+        for (int i = 0; i < this.tamanioTablero; i++)
+            for (int j = 0; j < this.tamanioTablero; j++)
                 this.tablero[i][j] = new Casillero();
     }
 
@@ -25,5 +25,18 @@ public class Tablero {
 
     public void setContenido(Contenido contenido, Posicion posicion) {
         this.tablero[posicion.getFila()][posicion.getColumna()].setContenido(contenido);
+    }
+
+    public boolean estaVacio() {
+        boolean estaOcupado = false;
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Posicion posicion = new Posicion(i, j);
+                estaOcupado = estaOcupado || this.getContenido(posicion).ocupado();
+            }
+        }
+
+        return !estaOcupado;
     }
 }

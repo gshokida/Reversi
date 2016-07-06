@@ -1,6 +1,7 @@
 package juego.modelo;
 
 import juego.modelo.exceptions.CasilleroOcupadoNoSePuedeAgregarFichaException;
+import juego.modelo.exceptions.PosicionNoValidaNoSePuedeAgregarFichaException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -43,7 +44,7 @@ public class JuegoTest {
 
         try {
             juego.setFicha(posicion);
-        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException e) {
+        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException | PosicionNoValidaNoSePuedeAgregarFichaException e) {
             fail();
         }
 
@@ -59,7 +60,7 @@ public class JuegoTest {
 
         try {
             juego.setFicha(posicion);
-        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException e) {
+        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException | PosicionNoValidaNoSePuedeAgregarFichaException e) {
             fail();
         }
 
@@ -73,7 +74,27 @@ public class JuegoTest {
         Juego juego = new Juego(jugadorUno, jugadorDos);
         Posicion posicion = new Posicion(4, 4);
 
-        juego.setFicha(posicion);
-        juego.setFicha(posicion);
+        try {
+            juego.setFicha(posicion);
+            juego.setFicha(posicion);
+        } catch (PosicionNoValidaNoSePuedeAgregarFichaException e) {
+            fail();
+        }
+    }
+
+    @Test(expected=PosicionNoValidaNoSePuedeAgregarFichaException.class)
+    public void nuevoJuego_noSeAgregarDosFichasAlejadas() throws PosicionNoValidaNoSePuedeAgregarFichaException {
+        Jugador jugadorUno = new Jugador("NombreUno");
+        Jugador jugadorDos = new Jugador("NombreDos");
+        Juego juego = new Juego(jugadorUno, jugadorDos);
+        Posicion posicion = new Posicion(4, 4);
+        Posicion posicionDos = new Posicion(0, 0);
+
+        try {
+            juego.setFicha(posicion);
+            juego.setFicha(posicionDos);
+        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException e) {
+            fail();
+        }
     }
 }
