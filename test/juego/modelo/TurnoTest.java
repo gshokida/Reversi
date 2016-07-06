@@ -16,4 +16,15 @@ public class TurnoTest {
 
         assertEquals(turno.getJugadorActual(), jugadorUno);
     }
+
+    @Test
+    public void turnoDevuelveJugadorFichasNegras() {
+        Jugador jugadorUno = new Jugador("NombreUno");
+        Jugador jugadorDos = new Jugador("NombreDos");
+        Turno turno = new Turno(jugadorUno, jugadorDos);
+
+        turno.getJugadorActual();
+
+        assertEquals(turno.getJugadorActual(), jugadorDos);
+    }
 }
