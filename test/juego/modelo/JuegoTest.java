@@ -65,4 +65,15 @@ public class JuegoTest {
 
         assertEquals(true, juego.getContenido(posicion).ocupado());
     }
+
+    @Test(expected=CasilleroOcupadoNoSePuedeAgregarFichaException.class)
+    public void nuevoJuego_NoSePuedeAgregarDosFichasEnLaMismaPosicion() throws CasilleroOcupadoNoSePuedeAgregarFichaException {
+        Jugador jugadorUno = new Jugador("NombreUno");
+        Jugador jugadorDos = new Jugador("NombreDos");
+        Juego juego = new Juego(jugadorUno, jugadorDos);
+        Posicion posicion = new Posicion(4, 4);
+
+        juego.setFicha(posicion);
+        juego.setFicha(posicion);
+    }
 }
