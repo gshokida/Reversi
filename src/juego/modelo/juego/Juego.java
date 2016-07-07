@@ -1,11 +1,8 @@
 package juego.modelo.juego;
 
+import juego.modelo.contenido.*;
 import juego.modelo.tablero.Posicion;
 import juego.modelo.tablero.Tablero;
-import juego.modelo.contenido.ColorBlanco;
-import juego.modelo.contenido.ColorNegro;
-import juego.modelo.contenido.Contenido;
-import juego.modelo.contenido.Ficha;
 import juego.modelo.exceptions.CasilleroOcupadoNoSePuedeAgregarFichaException;
 import juego.modelo.exceptions.PosicionNoValidaNoSePuedeAgregarFichaException;
 
@@ -52,6 +49,57 @@ public class Juego {
                     throw new PosicionNoValidaNoSePuedeAgregarFichaException();
                 }
             }
+
+            voltearFichasPorFlanqueo(posicion);
+        }
+    }
+
+    private void voltearFichasPorFlanqueo(Posicion posicion) {
+        Posicion posicionAlterna = new Posicion(posicion.getFila(), posicion.getColumna());
+        Color color = this.tableroReversi.getContenido(posicion).getColor();
+        boolean flanquea = false;
+        int i = 1;
+        int j = 1;
+
+        posicionAlterna.setColumna(posicion.getColumna() + 1);
+        while (posicionAlterna.getColumna() < this.tamanioTablero && this.tableroReversi.getContenido(posicionAlterna).ocupado()) {
+            flanquea = flanquea || this.tableroReversi.getContenido(posicionAlterna).getColor() == color;
+            i++;
+            posicionAlterna.setColumna(posicion.getColumna() + i);
+        }
+
+        posicionAlterna = new Posicion(posicion.getFila(), posicion.getColumna());
+
+        if (flanquea) {
+            posicionAlterna.setColumna(posicion.getColumna() + 1);
+            while (posicionAlterna.getColumna() < posicion.getColumna() + i && this.tableroReversi.getContenido(posicionAlterna).ocupado()) {
+                this.tableroReversi.getContenido(posicionAlterna).setColor(color);
+                j++;
+                posicionAlterna.setColumna(posicion.getColumna() + j);
+            }
+        }
+
+        posicionAlterna = new Posicion(posicion.getFila(), posicion.getColumna());
+
+        flanquea = false;
+        i = 1;
+        j = 1;
+        posicionAlterna.setColumna(posicion.getColumna() - 1);
+        while (posicionAlterna.getColumna() > 0 && this.tableroReversi.getContenido(posicionAlterna).ocupado()) {
+            flanquea = flanquea || this.tableroReversi.getContenido(posicionAlterna).getColor() == color;
+            i++;
+            posicionAlterna.setColumna(posicion.getColumna() - i);
+        }
+
+        posicionAlterna = new Posicion(posicion.getFila(), posicion.getColumna());
+
+        if (flanquea) {
+            posicionAlterna.setColumna(posicion.getColumna() - 1);
+            while (posicionAlterna.getColumna() > posicion.getColumna() - i && this.tableroReversi.getContenido(posicionAlterna).ocupado()) {
+                this.tableroReversi.getContenido(posicionAlterna).setColor(color);
+                j++;
+                posicionAlterna.setColumna(posicion.getColumna() - j);
+            }
         }
     }
 
@@ -59,10 +107,27 @@ public class Juego {
         Posicion posicionAlrededor = new Posicion(posicion.getFila(), posicion.getColumna());
         boolean posicionValida = false;
 
-        if (this.tamanioTablero < posicion.getFila() + 1) {
-            posicionAlrededor.setFila(posicionAlrededor.getFila() + 1);
+        if (posicion.getFila() + 1 < this.tamanioTablero) {
+            posicionAlrededor.setFila(posicion.getFila() + 1);
+            posicionValida = posicionValida || this.tableroReversi.getContenido(posicionAlrededor).ocupado();
         }
 
+        if (posicion.getFila() - 1 > 0) {
+            posicionAlrededor.setFila(posicion.getFila() - 1);
+            posicionValida = posicionValida || this.tableroReversi.getContenido(posicionAlrededor).ocupado();
+        }
+
+        posicionAlrededor.setFila(posicion.getFila());
+
+        if (posicion.getColumna() + 1 < this.tamanioTablero) {
+            posicionAlrededor.setColumna(posicion.getColumna() + 1);
+            posicionValida = posicionValida || this.tableroReversi.getContenido(posicionAlrededor).ocupado();
+        }
+
+        if (posicion.getColumna() - 1 > 0) {
+            posicionAlrededor.setColumna(posicion.getColumna() - 1);
+            posicionValida = posicionValida || this.tableroReversi.getContenido(posicionAlrededor).ocupado();
+        }
 
         return posicionValida;
     }

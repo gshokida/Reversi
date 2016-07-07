@@ -14,6 +14,10 @@ public class Ficha implements Contenido {
         return this.color;
     }
 
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public void voltear() {
         if (this.color.esIgual(ColorBlanco.getInstance()))
             this.color = ColorNegro.getInstance();

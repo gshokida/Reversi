@@ -1,5 +1,8 @@
 package juego.modelo.juego;
 
+import juego.modelo.contenido.ColorBlanco;
+import juego.modelo.contenido.ColorNegro;
+import juego.modelo.contenido.Ficha;
 import juego.modelo.tablero.Posicion;
 import juego.modelo.exceptions.CasilleroOcupadoNoSePuedeAgregarFichaException;
 import juego.modelo.exceptions.PosicionNoValidaNoSePuedeAgregarFichaException;
@@ -97,5 +100,49 @@ public class JuegoTest {
         } catch (CasilleroOcupadoNoSePuedeAgregarFichaException e) {
             fail();
         }
+    }
+
+    @Test
+    public void colocarFichas_flanquearHorizontal() {
+        Jugador jugadorUno = new Jugador("NombreUno");
+        Jugador jugadorDos = new Jugador("NombreDos");
+        Juego juego = new Juego(jugadorUno, jugadorDos);
+        Posicion posicion = new Posicion(4, 4);
+        Posicion posicionDos = new Posicion(4, 3);
+        Posicion posicionTres = new Posicion(4, 2);
+
+        try {
+            juego.setFicha(posicion);
+            juego.setFicha(posicionDos);
+            juego.setFicha(posicionTres);
+        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException | PosicionNoValidaNoSePuedeAgregarFichaException e) {
+            fail();
+        }
+
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicion).getColor());
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionDos).getColor());
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionTres).getColor());
+    }
+
+    @Test
+    public void colocarFichas_flanquearInversoHorizontal() {
+        Jugador jugadorUno = new Jugador("NombreUno");
+        Jugador jugadorDos = new Jugador("NombreDos");
+        Juego juego = new Juego(jugadorUno, jugadorDos);
+        Posicion posicion = new Posicion(4, 4);
+        Posicion posicionDos = new Posicion(4, 3);
+        Posicion posicionTres = new Posicion(4, 2);
+
+        try {
+            juego.setFicha(posicionTres);
+            juego.setFicha(posicionDos);
+            juego.setFicha(posicion);
+        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException | PosicionNoValidaNoSePuedeAgregarFichaException e) {
+            fail();
+        }
+
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicion).getColor());
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionDos).getColor());
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionTres).getColor());
     }
 }

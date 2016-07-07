@@ -8,4 +8,12 @@ public class ContenidoVacio implements Contenido {
     public boolean ocupado() {
         return false;
     }
+
+    public Color getColor() {
+        return SinColor.getInstance();
+    }
+
+    public void setColor(Color color) {
+
+    }
 }
