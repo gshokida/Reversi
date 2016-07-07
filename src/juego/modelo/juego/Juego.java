@@ -101,6 +101,52 @@ public class Juego {
                 posicionAlterna.setColumna(posicion.getColumna() - j);
             }
         }
+
+        posicionAlterna = new Posicion(posicion.getFila(), posicion.getColumna());
+        flanquea = false;
+        i = 1;
+        j = 1;
+
+        posicionAlterna.setFila(posicion.getFila() + 1);
+        while (posicionAlterna.getFila() < this.tamanioTablero && this.tableroReversi.getContenido(posicionAlterna).ocupado()) {
+            flanquea = flanquea || this.tableroReversi.getContenido(posicionAlterna).getColor() == color;
+            i++;
+            posicionAlterna.setFila(posicion.getFila() + i);
+        }
+
+        posicionAlterna = new Posicion(posicion.getFila(), posicion.getColumna());
+
+        if (flanquea) {
+            posicionAlterna.setFila(posicion.getFila() + 1);
+            while (posicionAlterna.getFila() < posicion.getFila() + i && this.tableroReversi.getContenido(posicionAlterna).ocupado()) {
+                this.tableroReversi.getContenido(posicionAlterna).setColor(color);
+                j++;
+                posicionAlterna.setFila(posicion.getFila() + j);
+            }
+        }
+
+        posicionAlterna = new Posicion(posicion.getFila(), posicion.getColumna());
+        flanquea = false;
+        i = 1;
+        j = 1;
+
+        posicionAlterna.setFila(posicion.getFila() - 1);
+        while (posicionAlterna.getFila() > 0 && this.tableroReversi.getContenido(posicionAlterna).ocupado()) {
+            flanquea = flanquea || this.tableroReversi.getContenido(posicionAlterna).getColor() == color;
+            i++;
+            posicionAlterna.setFila(posicion.getFila() - i);
+        }
+
+        posicionAlterna = new Posicion(posicion.getFila(), posicion.getColumna());
+
+        if (flanquea) {
+            posicionAlterna.setFila(posicion.getFila() - 1);
+            while (posicionAlterna.getFila() > posicion.getFila() - i && this.tableroReversi.getContenido(posicionAlterna).ocupado()) {
+                this.tableroReversi.getContenido(posicionAlterna).setColor(color);
+                j++;
+                posicionAlterna.setFila(posicion.getFila() - j);
+            }
+        }
     }
 
     private boolean verificarPosicionValida(Posicion posicion) {

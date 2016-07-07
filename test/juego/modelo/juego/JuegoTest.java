@@ -145,4 +145,48 @@ public class JuegoTest {
         assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionDos).getColor());
         assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionTres).getColor());
     }
+
+    @Test
+    public void colocarFichas_flanquearVertical() {
+        Jugador jugadorUno = new Jugador("NombreUno");
+        Jugador jugadorDos = new Jugador("NombreDos");
+        Juego juego = new Juego(jugadorUno, jugadorDos);
+        Posicion posicion = new Posicion(4, 4);
+        Posicion posicionDos = new Posicion(3, 4);
+        Posicion posicionTres = new Posicion(2, 4);
+
+        try {
+            juego.setFicha(posicion);
+            juego.setFicha(posicionDos);
+            juego.setFicha(posicionTres);
+        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException | PosicionNoValidaNoSePuedeAgregarFichaException e) {
+            fail();
+        }
+
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicion).getColor());
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionDos).getColor());
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionTres).getColor());
+    }
+
+    @Test
+    public void colocarFichas_flanquearInversoVertical() {
+        Jugador jugadorUno = new Jugador("NombreUno");
+        Jugador jugadorDos = new Jugador("NombreDos");
+        Juego juego = new Juego(jugadorUno, jugadorDos);
+        Posicion posicion = new Posicion(4, 4);
+        Posicion posicionDos = new Posicion(3, 4);
+        Posicion posicionTres = new Posicion(2, 4);
+
+        try {
+            juego.setFicha(posicionTres);
+            juego.setFicha(posicionDos);
+            juego.setFicha(posicion);
+        } catch (CasilleroOcupadoNoSePuedeAgregarFichaException | PosicionNoValidaNoSePuedeAgregarFichaException e) {
+            fail();
+        }
+
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicion).getColor());
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionDos).getColor());
+        assertEquals(ColorNegro.getInstance(), juego.getContenido(posicionTres).getColor());
+    }
 }
