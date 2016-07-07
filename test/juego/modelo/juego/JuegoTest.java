@@ -1,5 +1,6 @@
-package juego.modelo;
+package juego.modelo.juego;
 
+import juego.modelo.tablero.Posicion;
 import juego.modelo.exceptions.CasilleroOcupadoNoSePuedeAgregarFichaException;
 import juego.modelo.exceptions.PosicionNoValidaNoSePuedeAgregarFichaException;
 import org.junit.Test;

@@ -1,8 +1,9 @@
-package juego.modelo;
+package juego.modelo.tablero;
 
 import juego.modelo.contenido.ColorBlanco;
 import juego.modelo.contenido.ColorNegro;
 import juego.modelo.contenido.Ficha;
+import juego.modelo.tablero.Casillero;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

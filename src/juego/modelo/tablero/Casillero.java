@@ -1,4 +1,4 @@
-package juego.modelo;
+package juego.modelo.tablero;
 
 import juego.modelo.contenido.Contenido;
 import juego.modelo.contenido.ContenidoVacio;

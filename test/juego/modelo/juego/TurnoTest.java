@@ -1,5 +1,7 @@
-package juego.modelo;
+package juego.modelo.juego;
 
+import juego.modelo.juego.Jugador;
+import juego.modelo.juego.Turno;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

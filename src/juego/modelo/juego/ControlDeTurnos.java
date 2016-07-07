@@ -1,4 +1,4 @@
-package juego.modelo;
+package juego.modelo.juego;
 
 /**
  * Created by german.shokida on 6/7/2016.

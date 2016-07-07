@@ -1,4 +1,4 @@
-package juego.modelo;
+package juego.modelo.tablero;
 
 /**
  * Created by German on 05/07/2016.

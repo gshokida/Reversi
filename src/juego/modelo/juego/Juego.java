@@ -1,5 +1,7 @@
-package juego.modelo;
+package juego.modelo.juego;
 
+import juego.modelo.tablero.Posicion;
+import juego.modelo.tablero.Tablero;
 import juego.modelo.contenido.ColorBlanco;
 import juego.modelo.contenido.ColorNegro;
 import juego.modelo.contenido.Contenido;

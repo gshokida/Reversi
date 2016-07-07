@@ -1,9 +1,11 @@
-package juego.modelo;
+package juego.modelo.tablero;
 
 import juego.modelo.contenido.ColorBlanco;
 import juego.modelo.contenido.ColorNegro;
 import juego.modelo.contenido.Ficha;
 import juego.modelo.exceptions.PosicionNoValidaNoSePuedeAgregarFichaException;
+import juego.modelo.tablero.Posicion;
+import juego.modelo.tablero.Tablero;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

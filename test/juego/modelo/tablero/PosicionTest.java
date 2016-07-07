@@ -1,5 +1,6 @@
-package juego.modelo;
+package juego.modelo.tablero;
 
+import juego.modelo.tablero.Posicion;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

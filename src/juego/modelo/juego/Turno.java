@@ -1,5 +1,6 @@
-package juego.modelo;
+package juego.modelo.juego;
 
+import juego.modelo.juego.Jugador;
 import juego.modelo.utils.Cola;
 
 /**
